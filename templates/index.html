@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Variables Form</title>
+</head>
+<body>
+    <h2>Static Variables</h2>
+    <form action="/predict" method="post">
+        <input type="text" name="MED_SH" placeholder="MED_SH" required="required" />
+        <input type="text" name="BIS_sum" placeholder="BIS_sum" required="required" />
+        <input type="text" name="BPRS_AFF" placeholder="BPRS_AFF" required="required" />
+        <input type="text" name="PH_tx_status" placeholder="PH_tx_status" required="required" />
+        <input type="text" name="convicted" placeholder="convicted" required="required" />
+        <input type="text" name="CTQ_PN" placeholder="CTQ_PN" required="required" />
+        <input type="text" name="CTQ_EN" placeholder="CTQ_EN" required="required" />
+        <input type="text" name="BPRS_POS" placeholder="BPRS_POS" required="required" />
+        <input type="text" name="CS_status_1_score_cal" placeholder="CS_status_1_score_cal" required="required" />
+        <input type="text" name="DIG_cat" placeholder="DIG_cat" required="required" />
+
+        <h2>Sequence Variables</h2>
+        <input type="text" name="Daily_Entropy" placeholder="Daily_Entropy" required="required" />
+        <input type="text" name="Normalized_Daily_Entropy" placeholder="Normalized_Daily_Entropy" required="required" />
+        <input type="text" name="Eight_Hour_Entropy" placeholder="Eight_Hour_Entropy" required="required" />
+        <input type="text" name="Normalized_Eight_Hour_Entropy" placeholder="Normalized_Eight_Hour_Entropy" required="required" />
+        <input type="text" name="Location_Variability" placeholder="Location_Variability" required="required" />
+        <input type="text" name="place" placeholder="place" required="required" />
+        <input type="text" name="first_TOTAL_ACCELERATION" placeholder="first_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="last_TOTAL_ACCELERATION" placeholder="last_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="mean_TOTAL_ACCELERATION" placeholder="mean_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="median_TOTAL_ACCELERATION" placeholder="median_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="max_TOTAL_ACCELERATION" placeholder="max_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="min_TOTAL_ACCELERATION" placeholder="min_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="std_TOTAL_ACCELERATION" placeholder="std_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="nunique_TOTAL_ACCELERATION" placeholder="nunique_TOTAL_ACCELERATION" required="required" />
+        <input type="text" name="first_HEARTBEAT" placeholder="first_HEARTBEAT" required="required" />
+        <input type="text" name="last_HEARTBEAT" placeholder="last_HEARTBEAT" required="required" />
+        <input type="text" name="mean_HEARTBEAT" placeholder="mean_HEARTBEAT" required="required" />
+        <input type="text" name="median_HEARTBEAT" placeholder="median_HEARTBEAT" required="required" />
+        <input type="text" name="max_HEARTBEAT" placeholder="max_HEARTBEAT" required="required" />
+        <input type="text" name="min_HEARTBEAT" placeholder="min_HEARTBEAT" required="required" />
+        <input type="text" name="std_HEARTBEAT" placeholder="std_HEARTBEAT" required="required" />
+        <input type="text" name="nunique_HEARTBEAT" placeholder="nunique_HEARTBEAT" required="required" />
+        <input type="text" name="delta_DISTANCE" placeholder="delta_DISTANCE" required="required" />
+        <input type="text" name="delta_SLEEP" placeholder="delta_SLEEP" required="required" />
+        <input type="text" name="delta_STEP" placeholder="delta_STEP" required="required" />
+        <input type="text" name="delta_CALORIES" placeholder="delta_CALORIES" required="required" />
+        
+        <button type="submit">Submit</button>
+    </form>
+    <h2>{{ prediction_text }}</h2>
+</body>
+</html>
