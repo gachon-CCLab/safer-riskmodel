@@ -25,6 +25,7 @@ from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel, Field
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
+import uvicorn
 
 load_dotenv()
 
@@ -120,6 +121,9 @@ class InputData(BaseModel):
     sequence: Dict[str, float] = Field(..., min_items=26, max_items=26)
 
 # ───────────────────── FastAPI ─────────────────────
+
+print("safer-riskmodel")
+
 app = FastAPI(title="TFT Predictor + rwd/data 연동")
 
 def to_vec(src: Dict[str,float], order: List[str]) -> np.ndarray:
@@ -172,3 +176,6 @@ def predict_by_id(id: str = Query(..., description="환자 이름(식별자)")):
 @app.get("/")
 def root():
     return {"msg": "TFT Predictor is up"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

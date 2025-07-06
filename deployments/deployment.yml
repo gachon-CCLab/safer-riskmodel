@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: safer-riskmodel
+  labels:
+    app: safer-riskmodel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: safer-riskmodel
+  template:
+    metadata:
+      labels:
+        app: safer-riskmodel
+    spec:
+      containers:
+        - name: safer-riskmodel-container
+          image: python:3.11.5
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              apt-get update -y &&
+              mkdir -p ~/.ssh &&
+              echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa &&
+              chmod 600 ~/.ssh/id_rsa &&
+              touch ~/.ssh/known_hosts &&
+              ssh-keyscan github.com >> ~/.ssh/known_hosts &&
+              git clone git@github.com:gachon-CCLab/safer-riskmodel.git /app &&
+              python3 -m pip install -r /app/req.txt &&
+              python3 /app/main.py
+          env:
+            - name: SSH_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: safer-secret
+                  key: SSH_PRIVATE_KEY
+            - name: HOST
+              value: "0.0.0.0"
+            - name: DANGEROUSLY_DISABLE_HOST_CHECK
+              value: "true"
+          ports:
+            - containerPort: 8000
