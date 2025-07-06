@@ -141,12 +141,23 @@ def predict_json(data: InputData):
 # predict-by-id : rwd/data에서 조회 → 예측 
 RWD_BASE = os.getenv("RWD_BASE", "http://210.102.181.208:40011")
 #  /rwd/data : DB → static/sequence JSON
+# ───────────────────── FastAPI ─────────────────────
+INTERNAL_FLAG = RWD_BASE in ("", "internal", "self")          # 편의 플래그
 @app.get("/rwd/data")
 def rwd_data(id: str = Query(..., description="환자 이름(식별자)")):
+    if not INTERNAL_FLAG:
+        try:
+            r = requests.get(f"{RWD_BASE}/rwd/data", params={"id": id}, timeout=5)
+            r.raise_for_status()
+        except requests.exceptions.RequestException as e:
+            raise HTTPException(502, f"외부 rwd/data 호출 실패: {e}")
+        return r.json()
+
+    
     select_sql = text(
         f"SELECT {', '.join(static_vars + sequence_vars)} "
         "FROM sensor_pred_flat "
-        "WHERE `이름` = :rid"           
+        "WHERE `이름` = :rid"
     )
     with SessionLocal() as db:
         row = db.execute(select_sql, {"rid": id}).mappings().first()
