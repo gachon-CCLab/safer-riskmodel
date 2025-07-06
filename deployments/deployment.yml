@@ -20,6 +20,7 @@ spec:
           command: ["/bin/sh", "-c"]
           args:
             - |
+              set -e &&
               apt-get update -y &&
               git clone https://github.com/gachon-CCLab/safer-riskmodel.git /app &&
               python3 -m pip install -r /app/req.txt &&
