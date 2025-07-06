@@ -91,7 +91,7 @@ model = TemporalFusionTransformer(
     hidden_size=16, lstm_layers=2, dropout=0.1, output_size=1,
     attn_heads=4, static_in=10, seq_in=26).to(device)
 
-ckpt = torch.load(os.getenv("MODEL_CKPT", "./tft_model.pth"), map_location=device)
+ckpt = torch.load(os.getenv("MODEL_CKPT", "./app/tft_model.pth"), map_location=device)
 sd   = ckpt["model_state_dict"] if "model_state_dict" in ckpt else ckpt
 for k in list(sd):
     if k in model.state_dict() and model.state_dict()[k].shape != sd[k].shape:
